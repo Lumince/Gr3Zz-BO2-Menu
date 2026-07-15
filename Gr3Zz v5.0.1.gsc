@@ -2,56 +2,25 @@
 #include common_scripts/utility;
 #include maps/mp/gametypes_zm/_hud_util;
 #include maps/mp/zombies/_zm_utility;
+#include maps/mp/zombies/_zm_craftables;
 #include maps/mp/zombies/_zm_weapons;
 #include maps/mp/zombies/_zm_perks;
 #include maps/mp/zombies/_zm_audio;
 #include maps/mp/zombies/_zm_powerups;
-#include maps/mp/zm_tomb_craftables;
-#include maps/mp/zm_tomb_tank;
-#include maps/mp/zm_tomb_challenges;
 #include maps/mp/zombies/_zm_challenges;
-#include maps/mp/zm_tomb_chamber;
 #include maps/mp/zombies/_zm_zonemgr;
 #include maps/mp/zombies/_zm_unitrigger;
 #include maps/mp/animscripts/zm_shared;
 #include maps/mp/zombies/_zm_ai_basic;
-#include maps/mp/zm_tomb_vo;
-#include maps/mp/zm_tomb_teleporter;
 #include maps/mp/_visionset_mgr;
 #include maps/mp/zombies/_zm_equipment;
 #include maps/mp/zombies/_zm_spawner;
 #include maps/mp/zombies/_zm_net;
-#include maps/mp/zm_tomb_capture_zones;
-#include maps/mp/zm_tomb;
 #include maps/mp/zombies/_zm_laststand;
-#include maps/mp/zombies/_zm_challenges;
 #include maps/mp/zombies/_zm_score;
 #include maps/mp/zombies/_zm_devgui;
-#include maps/mp/zombies/_zm_audio;
-#include maps/mp/_visionset_mgr;
-#include maps/mp/zm_tomb_chamber;
-#include maps/mp/zombies/_zm_zonemgr;
-#include maps/mp/zm_tomb_main_quest;
-#include maps/mp/zm_tomb_dig;
-#include maps/mp/zm_tomb_ambient_scripts;
-#include maps/mp/zm_tomb_challenges;
-#include maps/mp/zombies/_zm_spawner;
-#include maps/mp/zm_tomb_distance_tracking;
-#include maps/mp/zm_tomb;
-#include maps/mp/zombies/_zm_weap_one_inch_punch;
-#include maps/mp/zombies/_zm_perk_electric_cherry;
-#include maps/mp/zombies/_zm_perks;
-#include maps/mp/zombies/_zm_perk_divetonuke;
-#include maps/mp/zm_tomb_vo;
 #include maps/mp/gametypes_zm/_spawning;
 #include maps/mp/animscripts/zm_death;
-#include maps/mp/zm_tomb_capture_zones;
-#include maps/mp/zm_tomb_ffotd;
-#include maps/mp/zm_tomb_utility;
-#include maps/mp/zombies/_zm_weapons;
-#include maps/mp/zombies/_zm_utility;
-#include maps/mp/_utility;
-#include common_scripts/utility;
 
 init()
 {
@@ -5811,4 +5780,21 @@ damagezombiesinrange( range, what, amount )
 		}
 	}
 
+}
+
+// Harmless stubs to prevent linker errors on non-Origins maps
+add_zombie_craftable( craftable_name, craftable_prompt, craftable_model, craftable_trigger_offset, craftable_build_time )
+{
+    if( GetDvar( "mapname" ) == "zm_tomb" )
+    {
+        // Real logic executes only on Origins
+    }
+}
+
+add_zombie_craftable_vox_category( craftable_name, vox_id )
+{
+    if( GetDvar( "mapname" ) == "zm_tomb" )
+    {
+        // Real logic executes only on Origins
+    }
 }
