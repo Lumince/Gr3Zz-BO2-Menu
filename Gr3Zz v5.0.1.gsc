@@ -4744,11 +4744,19 @@ pooledbuildable_stub_for_piece( piece )
 
 AllBoxLocations()
 {
-	foreach(box in level.chests)
-	{
-		box thread maps/mp/zombies/_zm_magicbox::show_chest();
-	}
-	self iPrintln("MysteryBox is everywhere now!");
+    // Trick the game's main logic into thinking a Fire Sale is always active
+    level.zombie_vars["zombie_powerup_fire_sale_on"] = 1;
+
+    foreach(box in level.chests)
+    {
+        // Apply the native flag to prevent the Teddy Bear calculation (-1 chance)
+        box.no_fly_away = 1; 
+        
+        // Spawn the box
+        box thread maps\mp\zombies\_zm_magicbox::show_chest();
+    }
+    
+    self iPrintln("MysteryBox is everywhere now!");
 }
 BoxStays()
 {
