@@ -135,36 +135,36 @@ MenuStructure()
 {
 	if (self.Verified==true)
 	{
-		self MainMenu("Gr3Zz v5.0.1",undefined);
-		self MenuOption("Gr3Zz v5.0.1",0,"Main Mods",::SubMenu,"Main Mods");
-		self MenuOption("Gr3Zz v5.0.1",1,"Melee/Equipment Menu",::SubMenu,"Melee/Equipment Menu");
-		self MenuOption("Gr3Zz v5.0.1",2,"Weapons Menu",::SubMenu,"Weapons Menu");
-		self MenuOption("Gr3Zz v5.0.1",3,"Upgraded Weapons Menu",::SubMenu,"Upgraded Weapons Menu");
-		self MenuOption("Gr3Zz v5.0.1",4,"Bullets Menu",::SubMenu,"Bullets Menu");
+		self MainMenu("Gr3Zz v5.0.2",undefined);
+		self MenuOption("Gr3Zz v5.0.2",0,"Main Mods",::SubMenu,"Main Mods");
+		self MenuOption("Gr3Zz v5.0.2",1,"Melee/Equipment Menu",::SubMenu,"Melee/Equipment Menu");
+		self MenuOption("Gr3Zz v5.0.2",2,"Weapons Menu",::SubMenu,"Weapons Menu");
+		self MenuOption("Gr3Zz v5.0.2",3,"Upgraded Weapons Menu",::SubMenu,"Upgraded Weapons Menu");
+		self MenuOption("Gr3Zz v5.0.2",4,"Bullets Menu",::SubMenu,"Bullets Menu");
 	}
 	if (self.VIP==true)
 	{
-		self MenuOption("Gr3Zz v5.0.1",5,"Perks Menu",::SubMenu,"Perks Menu");
-		self MenuOption("Gr3Zz v5.0.1",6,"Fun Menu",::SubMenu,"Fun Menu");
-		self MenuOption("Gr3Zz v5.0.1",7,"Theme Menu",::SubMenu,"Theme Menu");
-		self MenuOption("Gr3Zz v5.0.1",8,"Teleport Menu",::SubMenu,"Teleport Menu");
-		self MenuOption("Gr3Zz v5.0.1",9,"Power Ups",::SubMenu,"Power Ups");
+		self MenuOption("Gr3Zz v5.0.2",5,"Perks Menu",::SubMenu,"Perks Menu");
+		self MenuOption("Gr3Zz v5.0.2",6,"Fun Menu",::SubMenu,"Fun Menu");
+		self MenuOption("Gr3Zz v5.0.2",7,"Theme Menu",::SubMenu,"Theme Menu");
+		self MenuOption("Gr3Zz v5.0.2",8,"Teleport Menu",::SubMenu,"Teleport Menu");
+		self MenuOption("Gr3Zz v5.0.2",9,"Power Ups",::SubMenu,"Power Ups");
 	}
 	if (self.CoHostself.CoHost==true)
 	{
-		self MenuOption("Gr3Zz v5.0.1",10,"Game Settings",::SubMenu,"Game Settings");
-		self MenuOption("Gr3Zz v5.0.1",11,"Clients Menu",::SubMenu,"Clients Menu");
-		self MenuOption("Gr3Zz v5.0.1",12,"All Clients",::SubMenu,"All Clients");
+		self MenuOption("Gr3Zz v5.0.2",10,"Game Settings",::SubMenu,"Game Settings");
+		self MenuOption("Gr3Zz v5.0.2",11,"Clients Menu",::SubMenu,"Clients Menu");
+		self MenuOption("Gr3Zz v5.0.2",12,"All Clients",::SubMenu,"All Clients");
 	}
 	if (self.Origins==true)
 	{
 	switch(GetDvar( "mapname" )){
 	case "zm_tomb": // Origins
-		self MenuOption("Gr3Zz v5.0.1",13,"Staffs Menu",::SubMenu,"Staffs Menu");
+		self MenuOption("Gr3Zz v5.0.2",13,"Staffs Menu",::SubMenu,"Staffs Menu");
         break;
 		}
 	}
-	self MainMenu("Main Mods","Gr3Zz v5.0.1");
+	self MainMenu("Main Mods","Gr3Zz v5.0.2");
 	self MenuOption("Main Mods",0,"GodMod",::Toggle_God);
 	self MenuOption("Main Mods",1,"Unlimited Ammo",::Toggle_Ammo);
 	self MenuOption("Main Mods",2,"x2 Speed",::doMiniSpeed);
@@ -192,7 +192,7 @@ MenuStructure()
 	self MenuOption("Main Mods",9,"Give All Buildables",::giveAllBuildables);
         break;
 }
-	self MainMenu("Melee/Equipment Menu","Gr3Zz v5.0.1");
+	self MainMenu("Melee/Equipment Menu","Gr3Zz v5.0.2");
 	self MenuOption("Melee/Equipment Menu",0,"Frag Grenade",::dolethal,"frag_grenade_zm");
 	self MenuOption("Melee/Equipment Menu",1,"Claymore",::doclaymore);
 	switch(GetDvar( "mapname" )){
@@ -265,7 +265,7 @@ MenuStructure()
 	self MenuOption("Melee/Equipment Menu",9,"Upgraded Ballistic Bowie",::doWeapon2,"knife_ballistic_bowie_upgraded_zm");
         break;
 }
-	self MainMenu("Weapons Menu","Gr3Zz v5.0.1");
+	self MainMenu("Weapons Menu","Gr3Zz v5.0.2");
 	self MenuOption("Weapons Menu",0,"Ray Gun",::doWeapon2,"ray_gun_zm");
 	self MenuOption("Weapons Menu",1,"RayGun Mark2",::doWeapon2,"raygun_mark2_zm");
 	self MenuOption("Weapons Menu",2,"M14",::doWeapon2,"m14_zm");
@@ -352,7 +352,7 @@ MenuStructure()
 	self MenuOption("Weapons Menu",16,"LSAT",::doWeapon2,"lsat_zm");
         break;
 }
-	self MainMenu("Upgraded Weapons Menu","Gr3Zz v5.0.1");
+	self MainMenu("Upgraded Weapons Menu","Gr3Zz v5.0.2");
 	self MenuOption("Upgraded Weapons Menu",0,"Ray Gun",::doWeapon2,"ray_gun_upgraded_zm");
 	self MenuOption("Upgraded Weapons Menu",1,"RayGun Mark2",::doWeapon2,"raygun_mark2_upgraded_zm");
 	self MenuOption("Upgraded Weapons Menu",2,"M14",::doWeapon2,"m14_upgraded_zm");
@@ -440,7 +440,7 @@ MenuStructure()
 }
 	switch(GetDvar( "mapname" )){
 	case "zm_tomb": // Origins
-	self MainMenu("Staffs Menu","Gr3Zz v5.0.1");
+	self MainMenu("Staffs Menu","Gr3Zz v5.0.2");
 	self MenuOption("Staffs Menu",0,"Air Staff",::doWeapon2,"staff_air_zm");
     self MenuOption("Staffs Menu",1,"Fire Staff",::doWeapon2,"staff_fire_zm");
 	self MenuOption("Staffs Menu",2,"Ice Staff",::doWeapon2,"staff_water_zm");		
@@ -452,7 +452,7 @@ MenuStructure()
 	self MenuOption("Staffs Menu",8,"Upgraded Lightning Staff",::doWeapon3,"staff_water_upgraded_zm");
 		break;
 }
-	self MainMenu("Bullets Menu","Gr3Zz v5.0.1");
+	self MainMenu("Bullets Menu","Gr3Zz v5.0.2");
 	self MenuOption("Bullets Menu",0,"Bullets Ricochet",::Tgl_Ricochet);
 	self MenuOption("Bullets Menu",1,"Teleporter Weapons",::TeleportGun);
 	self MenuOption("Bullets Menu",2,"FlameThrower",::FTH);
@@ -516,7 +516,7 @@ MenuStructure()
 	self MenuOption("Bullets Menu",10,"Normal Bullets",::NormalBullets);
         break;
 }
-	self MainMenu("Perks Menu","Gr3Zz v5.0.1");
+	self MainMenu("Perks Menu","Gr3Zz v5.0.2");
 	self MenuOption("Perks Menu",0,"Juggernog",::doPerks,"specialty_armorvest");
 	self MenuOption("Perks Menu",1,"Quick Revive",::doPerks,"specialty_quickrevive");
 	self MenuOption("Perks Menu",2,"SpeedCola",::doPerks,"specialty_fastreload");
@@ -560,7 +560,7 @@ MenuStructure()
 	self MenuOption("Perks Menu",7,"Remove All Perks",::removeallperks);
         break;
 }
-	self MainMenu("Fun Menu","Gr3Zz v5.0.1");
+	self MainMenu("Fun Menu","Gr3Zz v5.0.2");
 	self MenuOption("Fun Menu",0,"UFO Mode",::UFOMode);
 	self MenuOption("Fun Menu",1,"Forge Mode",::Forge);
 	self MenuOption("Fun Menu",2,"Aimbot",::doAimbot);
@@ -599,7 +599,7 @@ MenuStructure()
 	self MenuOption("Fun Menu",15,"Song: NukeTown 3",::NukedSong3);
         break;
 }
-	self MainMenu("Theme Menu","Gr3Zz v5.0.1");
+	self MainMenu("Theme Menu","Gr3Zz v5.0.2");
 	self MenuOption("Theme Menu",0,"Default Theme",::doDefaultTheme);
 	self MenuOption("Theme Menu",1,"Blue Theme",::doBlue);
 	self MenuOption("Theme Menu",2,"Green Theme",::doGreen);
@@ -607,7 +607,7 @@ MenuStructure()
 	self MenuOption("Theme Menu",4,"Pink Theme",::doPink);
 	self MenuOption("Theme Menu",5,"Cyan Theme",::doCyan);
 	self MenuOption("Theme Menu",6,"Center Menu",::doMenuCenter);
-	self MainMenu("Teleport Menu","Gr3Zz v5.0.1");
+	self MainMenu("Teleport Menu","Gr3Zz v5.0.2");
 	switch(GetDvar( "mapname" )){
 	case "zm_transit": // Tranzit
 	self MenuOption("Teleport Menu",0,"Bus",::teleportToBus);
@@ -684,7 +684,7 @@ MenuStructure()
 	self MenuOption("Teleport Menu",8,"Yellow Garage",::teleporttoYellowGarage);
         break;
 }
-	self MainMenu("Power Ups","Gr3Zz v5.0.1");	
+	self MainMenu("Power Ups","Gr3Zz v5.0.2");	
 	self MenuOption("Power Ups",0,"Nuke Bomb",::doPNuke);
 	self MenuOption("Power Ups",1,"Max Ammo",::doPMAmmo);
 	self MenuOption("Power Ups",2,"Double Points",::doPDoublePoints);
@@ -718,7 +718,7 @@ MenuStructure()
 	self MenuOption("Power Ups",4,"Fire Sale",::GivePowerUp,"fire_sale");
         break;
 }
-	self MainMenu("Game Settings","Gr3Zz v5.0.1");
+	self MainMenu("Game Settings","Gr3Zz v5.0.2");
 	self MenuOption("Game Settings",0,"Open All Doors",::OpenAllTehDoors);
 	self MenuOption("Game Settings",1,"MysteryBox Everywhere",::AllBoxLocations);
 	self MenuOption("Game Settings",2,"MysteryBox Never Moves",::BoxStays);
@@ -736,7 +736,7 @@ MenuStructure()
 	self MenuOption("Game Settings",14,"Slow Zombies",::doSlowZombies);
 	self MenuOption("Game Settings",15,"Restart Match",::dorestartgame);
 	self MenuOption("Game Settings",16,"End Match",::doendgame);
-	self MainMenu("Clients Menu","Gr3Zz v5.0.1");
+	self MainMenu("Clients Menu","Gr3Zz v5.0.2");
 	for(p=0;p<level.players.size;p++)
 	{
 		player=level.players[p];
@@ -756,7 +756,7 @@ MenuStructure()
 	self MenuOption("Clients Functions",9,"Give GodMod",::PlayerGiveGodMod);
 	self MenuOption("Clients Functions",10,"Revive",::doRevivePlayer);
 	self MenuOption("Clients Functions",11,"Kick",::kickPlayer);
-	self MainMenu("All Clients","Gr3Zz v5.0.1");
+	self MainMenu("All Clients","Gr3Zz v5.0.2");
 	self MenuOption("All Clients",0,"All GodMod",::AllPlayerGiveGodMod);
 	self MenuOption("All Clients",1,"Teleport All To Me",::doTeleportAllToMe);
 	self MenuOption("All Clients",2,"Freeze All Position",::doFreeAllPosition);
@@ -831,7 +831,7 @@ BuildMenu()
 		if(self SecondaryOffhandButtonPressed() && self.MenuOpen==false)
 		{
 			self OuvertureMenu();
-			self LoadMenu("Gr3Zz v5.0.1");
+			self LoadMenu("Gr3Zz v5.0.2");
 		}
 		else if (self MeleeButtonPressed() && self.MenuOpen==true)
 		{
