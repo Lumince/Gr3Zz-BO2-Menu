@@ -1,4 +1,4 @@
-# Gr3Zz v5.1
+# Gr3Zz v5.0.2
 
 This is a black ops II gsc script menu for Plutonium. This is an edited version of of Gr3Zz v4.1 that can be found [here.](https://www.se7ensins.com/forums/threads/release-gsc-black-ops-2-gr3zz-v4-1-zombie-patch-xbox-ps3-pc.1205963/
 )
