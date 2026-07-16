@@ -4838,79 +4838,57 @@ doPerks(a)
 	self maps/mp/zombies/_zm_perks::give_perk(a);
 	self iPrintln("Perk: "+self.Menu.System["MenuTexte"][self.Menu.System["MenuRoot"]][self.Menu.System["MenuCurser"]]+" ^2Given");
 }
-dogiveperk(perk)
-{
-	self endon("disconnect");
-	self endon("death");
-	level endon("game_ended");
-	self endon("perk_abort_drinking");
-	if(!self hasperk(perk) || self maps/mp/zombies/_zm_perks::has_perk_paused(perk))
-	{
-		gun = self maps/mp/zombies/_zm_perks::perk_give_bottle_begin(perk);
-		evt = self waittill_any_return("fake_death", "death", "player_downed", "weapon_change_complete");
-		if(evt == "weapon_change_complete")
-		{
-			self thread maps/mp/zombies/_zm_perks::wait_give_perk(perk, 1);
-		}
-		self maps/mp/zombies/_zm_perks::perk_give_bottle_end(gun, perk);
-		if(self maps/mp/zombies/_zm_laststand::player_is_in_laststand() || isdefined(self.intermission) && self.intermission)
-		{
-			return;
-		}
-		self notify("burp");
-	}
-}
 giveallperks()
 {
 	self iPrintln("All Perks ^1Given");
-	self iprintln( "^1Warning^7 : Wait Until You're Done Drinking" );
+	
 	if(isdefined(level.zombiemode_using_juggernaut_perk) && level.zombiemode_using_juggernaut_perk)
 	{
-		self dogiveperk("specialty_armorvest");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_armorvest");
 	}
 	if(isdefined(level.zombiemode_using_sleightofhand_perk) && level.zombiemode_using_sleightofhand_perk)
 	{
-		self dogiveperk("specialty_fastreload");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_fastreload");
 	}
 	if(isdefined(level.zombiemode_using_revive_perk) && level.zombiemode_using_revive_perk)
 	{
-		self dogiveperk("specialty_quickrevive");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_quickrevive");
 	}
 	if(isdefined(level.zombiemode_using_doubletap_perk) && level.zombiemode_using_doubletap_perk)
 	{
-		self dogiveperk("specialty_rof");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_rof");
 	}
 	if(isdefined(level.zombiemode_using_marathon_perk) && level.zombiemode_using_marathon_perk)
 	{
-		self dogiveperk("specialty_longersprint");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_longersprint");
 	}
 	if(isdefined(level.zombiemode_using_additionalprimaryweapon_perk) && level.zombiemode_using_additionalprimaryweapon_perk)
 	{
-		self dogiveperk("specialty_additionalprimaryweapon");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_additionalprimaryweapon");
 	}
 	if(isdefined(level.zombiemode_using_deadshot_perk) && level.zombiemode_using_deadshot_perk)
 	{
-		self dogiveperk("specialty_deadshot");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_deadshot");
 	}
 	if(isdefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk)
 	{
-		self dogiveperk("specialty_scavenger");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_scavenger");
 	}
-	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_flakjacket"]) && level.script != "zm_buried")
+	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_flakjacket"]))
 	{
-		self dogiveperk("specialty_flakjacket");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_flakjacket");
 	}
 	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_nomotionsensor"]))
 	{
-		self dogiveperk("specialty_nomotionsensor");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_nomotionsensor");
 	}
 	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_grenadepulldeath"]))
 	{
-		self dogiveperk("specialty_grenadepulldeath");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_grenadepulldeath");
 	}
 	if(isdefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk)
 	{
-		self dogiveperk("specialty_finalstand");
+		self maps/mp/zombies/_zm_perks::give_perk("specialty_finalstand");
 	}
 }
 removeallperks()
