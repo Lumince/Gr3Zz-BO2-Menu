@@ -942,7 +942,7 @@ DefaultMenuSettings()
 	self.glowtitre=(1,0,0);
 	
 	self.MenuWidth = 240; 
-	self.MenuHeight = 580; // Make sure this matches the height above
+	self.MenuHeight = 950;
 	self.MenuX = 120;     
 	self.TextOffset = 5;  
 	
@@ -965,7 +965,7 @@ InitialisingMenu()
 	// RESOLUTION CONFIGURATION CONFIG
 	// ==========================================
 	self.MenuWidth = 240;  
-	self.MenuHeight = 580; // Increased from 480 to fit your long text list cleanly
+	self.MenuHeight = 950; // Make sure this matches the height above
 	self.MenuX = 120;      
 	self.TextOffset = 5;   
 	
