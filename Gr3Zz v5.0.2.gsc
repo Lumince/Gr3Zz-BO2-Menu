@@ -1,26 +1,26 @@
-#include maps/mp/_utility;
-#include common_scripts/utility;
-#include maps/mp/gametypes_zm/_hud_util;
-#include maps/mp/zombies/_zm_utility;
-#include maps/mp/zombies/_zm_craftables;
-#include maps/mp/zombies/_zm_weapons;
-#include maps/mp/zombies/_zm_perks;
-#include maps/mp/zombies/_zm_audio;
-#include maps/mp/zombies/_zm_powerups;
-#include maps/mp/zombies/_zm_challenges;
-#include maps/mp/zombies/_zm_zonemgr;
-#include maps/mp/zombies/_zm_unitrigger;
-#include maps/mp/animscripts/zm_shared;
-#include maps/mp/zombies/_zm_ai_basic;
-#include maps/mp/_visionset_mgr;
-#include maps/mp/zombies/_zm_equipment;
-#include maps/mp/zombies/_zm_spawner;
-#include maps/mp/zombies/_zm_net;
-#include maps/mp/zombies/_zm_laststand;
-#include maps/mp/zombies/_zm_score;
-#include maps/mp/zombies/_zm_devgui;
-#include maps/mp/gametypes_zm/_spawning;
-#include maps/mp/animscripts/zm_death;
+#include maps\mp\_utility;
+#include common_scripts\utility;
+#include maps\mp\gametypes_zm\_hud_util;
+#include maps\mp\zombies\_zm_utility;
+#include maps\mp\zombies\_zm_craftables;
+#include maps\mp\zombies\_zm_weapons;
+#include maps\mp\zombies\_zm_perks;
+#include maps\mp\zombies\_zm_audio;
+#include maps\mp\zombies\_zm_powerups;
+#include maps\mp\zombies\_zm_challenges;
+#include maps\mp\zombies\_zm_zonemgr;
+#include maps\mp\zombies\_zm_unitrigger;
+#include maps\mp\animscripts\zm_shared;
+#include maps\mp\zombies\_zm_ai_basic;
+#include maps\mp\_visionset_mgr;
+#include maps\mp\zombies\_zm_equipment;
+#include maps\mp\zombies\_zm_spawner;
+#include maps\mp\zombies\_zm_net;
+#include maps\mp\zombies\_zm_laststand;
+#include maps\mp\zombies\_zm_score;
+#include maps\mp\zombies\_zm_devgui;
+#include maps\mp\gametypes_zm\_spawning;
+#include maps\mp\animscripts\zm_death;
 
 init()
 {
@@ -103,68 +103,59 @@ onplayerspawned()
 
 //8 Guns
 MuleForAll()
-  {
-  self endon("disconnect");
-  if ( isDefined( level.zombiemode_using_additionalprimaryweapon_perk ) && level.zombiemode_using_additionalprimaryweapon_perk )
-  {
-  level thread mule_kick_4_weapons();
-  }
-  }
-  mule_kick_4_weapons()
-  {
-  _a1697 = get_players();
-  _k1697 = getFirstArrayKey( _a1697 );
-  while ( isDefined( _k1697 ) )
-  {
-  player = _a1697[ _k1697 ];
-  if ( !isDefined( player._retain_perks_array ) )
-  {
-  player._retain_perks_array = [];
-  }
-  if ( !player hasperk( "specialty_additionalprimaryweapon" ) )
-  {
-  player maps/mp/zombies/_zm_perks::give_perk( "specialty_additionalprimaryweapon", 0 );
-  }
-  player._retain_perks_array[ "specialty_additionalprimaryweapon" ] = 1;
-  _k1697 = getNextArrayKey( _a1697, _k1697 );
-  }
-  level.additionalprimaryweapon_limit = 8;
-  }
+{
+    self endon("disconnect");
+    if(isDefined(level.zombiemode_using_additionalprimaryweapon_perk) && level.zombiemode_using_additionalprimaryweapon_perk)
+    {
+        foreach(player in get_players())
+        {
+            if(!isDefined(player._retain_perks_array)) player._retain_perks_array = [];
+            if(!player hasperk("specialty_additionalprimaryweapon")) player maps\mp\zombies\_zm_perks::give_perk("specialty_additionalprimaryweapon", 0);
+            player._retain_perks_array["specialty_additionalprimaryweapon"] = 1;
+        }
+        level.additionalprimaryweapon_limit = 8;
+    }
+}
+
+getMenuName()
+{
+	return "Gr3Zz v5.0.2";
+}
 
 MenuStructure()
 {
 	if (self.Verified==true)
 	{
-		self MainMenu("Gr3Zz v5.0.2",undefined);
-		self MenuOption("Gr3Zz v5.0.2",0,"Main Mods",::SubMenu,"Main Mods");
-		self MenuOption("Gr3Zz v5.0.2",1,"Melee/Equipment Menu",::SubMenu,"Melee/Equipment Menu");
-		self MenuOption("Gr3Zz v5.0.2",2,"Weapons Menu",::SubMenu,"Weapons Menu");
-		self MenuOption("Gr3Zz v5.0.2",3,"Upgraded Weapons Menu",::SubMenu,"Upgraded Weapons Menu");
-		self MenuOption("Gr3Zz v5.0.2",4,"Bullets Menu",::SubMenu,"Bullets Menu");
+		self MainMenu(getMenuName(), undefined);
+		self MenuOption(getMenuName(),0,"Main Mods",::SubMenu,"Main Mods");
+		self MenuOption(getMenuName(),1,"Melee/Equipment Menu",::SubMenu,"Melee/Equipment Menu");
+		self MenuOption(getMenuName(),2,"Weapons Menu",::SubMenu,"Weapons Menu");
+		self MenuOption(getMenuName(),3,"Upgraded Weapons Menu",::SubMenu,"Upgraded Weapons Menu");
+		self MenuOption(getMenuName(),4,"Bullets Menu",::SubMenu,"Bullets Menu");
 	}
 	if (self.VIP==true)
 	{
-		self MenuOption("Gr3Zz v5.0.2",5,"Perks Menu",::SubMenu,"Perks Menu");
-		self MenuOption("Gr3Zz v5.0.2",6,"Fun Menu",::SubMenu,"Fun Menu");
-		self MenuOption("Gr3Zz v5.0.2",7,"Theme Menu",::SubMenu,"Theme Menu");
-		self MenuOption("Gr3Zz v5.0.2",8,"Teleport Menu",::SubMenu,"Teleport Menu");
-		self MenuOption("Gr3Zz v5.0.2",9,"Power Ups",::SubMenu,"Power Ups");
+		self MenuOption(getMenuName(),5,"Perks Menu",::SubMenu,"Perks Menu");
+		self MenuOption(getMenuName(),6,"Fun Menu",::SubMenu,"Fun Menu");
+		self MenuOption(getMenuName(),7,"Theme Menu",::SubMenu,"Theme Menu");
+		self MenuOption(getMenuName(),8,"Teleport Menu",::SubMenu,"Teleport Menu");
+		self MenuOption(getMenuName(),9,"Power Ups",::SubMenu,"Power Ups");
 	}
 	if (self.CoHostself.CoHost==true)
 	{
-		self MenuOption("Gr3Zz v5.0.2",10,"Game Settings",::SubMenu,"Game Settings");
-		self MenuOption("Gr3Zz v5.0.2",11,"Clients Menu",::SubMenu,"Clients Menu");
-		self MenuOption("Gr3Zz v5.0.2",12,"All Clients",::SubMenu,"All Clients");
+		self MenuOption(getMenuName(),10,"Game Settings",::SubMenu,"Game Settings");
+		self MenuOption(getMenuName(),11,"Clients Menu",::SubMenu,"Clients Menu");
+		self MenuOption(getMenuName(),12,"All Clients",::SubMenu,"All Clients");
 	}
 	if (self.Origins==true)
 	{
 	switch(GetDvar( "mapname" )){
 	case "zm_tomb": // Origins
-		self MenuOption("Gr3Zz v5.0.2",13,"Staffs Menu",::SubMenu,"Staffs Menu");
+		self MenuOption(getMenuName(),13,"Staffs Menu",::SubMenu,"Staffs Menu");
         break;
 		}
 	}
-	self MainMenu("Main Mods","Gr3Zz v5.0.2");
+	self MainMenu("Main Mods",getMenuName());
 	self MenuOption("Main Mods",0,"GodMod",::Toggle_God);
 	self MenuOption("Main Mods",1,"Unlimited Ammo",::Toggle_Ammo);
 	self MenuOption("Main Mods",2,"x2 Speed",::doMiniSpeed);
@@ -192,7 +183,7 @@ MenuStructure()
 	self MenuOption("Main Mods",9,"Give All Buildables",::giveAllBuildables);
         break;
 }
-	self MainMenu("Melee/Equipment Menu","Gr3Zz v5.0.2");
+	self MainMenu("Melee/Equipment Menu",getMenuName());
 	self MenuOption("Melee/Equipment Menu",0,"Frag Grenade",::dolethal,"frag_grenade_zm");
 	self MenuOption("Melee/Equipment Menu",1,"Claymore",::doclaymore);
 	switch(GetDvar( "mapname" )){
@@ -265,7 +256,7 @@ MenuStructure()
 	self MenuOption("Melee/Equipment Menu",9,"Upgraded Ballistic Bowie",::doWeapon2,"knife_ballistic_bowie_upgraded_zm");
         break;
 }
-	self MainMenu("Weapons Menu","Gr3Zz v5.0.2");
+	self MainMenu("Weapons Menu",getMenuName());
 	self MenuOption("Weapons Menu",0,"Ray Gun",::doWeapon2,"ray_gun_zm");
 	self MenuOption("Weapons Menu",1,"RayGun Mark2",::doWeapon2,"raygun_mark2_zm");
 	self MenuOption("Weapons Menu",2,"M14",::doWeapon2,"m14_zm");
@@ -352,7 +343,7 @@ MenuStructure()
 	self MenuOption("Weapons Menu",16,"LSAT",::doWeapon2,"lsat_zm");
         break;
 }
-	self MainMenu("Upgraded Weapons Menu","Gr3Zz v5.0.2");
+	self MainMenu("Upgraded Weapons Menu",getMenuName());
 	self MenuOption("Upgraded Weapons Menu",0,"Ray Gun",::doWeapon2,"ray_gun_upgraded_zm");
 	self MenuOption("Upgraded Weapons Menu",1,"RayGun Mark2",::doWeapon2,"raygun_mark2_upgraded_zm");
 	self MenuOption("Upgraded Weapons Menu",2,"M14",::doWeapon2,"m14_upgraded_zm");
@@ -440,7 +431,7 @@ MenuStructure()
 }
 	switch(GetDvar( "mapname" )){
 	case "zm_tomb": // Origins
-	self MainMenu("Staffs Menu","Gr3Zz v5.0.2");
+	self MainMenu("Staffs Menu",getMenuName());
 	self MenuOption("Staffs Menu",0,"Air Staff",::doWeapon2,"staff_air_zm");
     self MenuOption("Staffs Menu",1,"Fire Staff",::doWeapon2,"staff_fire_zm");
 	self MenuOption("Staffs Menu",2,"Ice Staff",::doWeapon2,"staff_water_zm");		
@@ -452,7 +443,7 @@ MenuStructure()
 	self MenuOption("Staffs Menu",8,"Upgraded Lightning Staff",::doWeapon3,"staff_water_upgraded_zm");
 		break;
 }
-	self MainMenu("Bullets Menu","Gr3Zz v5.0.2");
+	self MainMenu("Bullets Menu",getMenuName());
 	self MenuOption("Bullets Menu",0,"Bullets Ricochet",::Tgl_Ricochet);
 	self MenuOption("Bullets Menu",1,"Teleporter Weapons",::TeleportGun);
 	self MenuOption("Bullets Menu",2,"FlameThrower",::FTH);
@@ -516,7 +507,7 @@ MenuStructure()
 	self MenuOption("Bullets Menu",10,"Normal Bullets",::NormalBullets);
         break;
 }
-	self MainMenu("Perks Menu","Gr3Zz v5.0.2");
+	self MainMenu("Perks Menu",getMenuName());
 	self MenuOption("Perks Menu",0,"Juggernog",::doPerks,"specialty_armorvest");
 	self MenuOption("Perks Menu",1,"Quick Revive",::doPerks,"specialty_quickrevive");
 	self MenuOption("Perks Menu",2,"SpeedCola",::doPerks,"specialty_fastreload");
@@ -560,7 +551,7 @@ MenuStructure()
 	self MenuOption("Perks Menu",7,"Remove All Perks",::removeallperks);
         break;
 }
-	self MainMenu("Fun Menu","Gr3Zz v5.0.2");
+	self MainMenu("Fun Menu",getMenuName());
 	self MenuOption("Fun Menu",0,"UFO Mode",::UFOMode);
 	self MenuOption("Fun Menu",1,"Forge Mode",::Forge);
 	self MenuOption("Fun Menu",2,"Aimbot",::doAimbot);
@@ -599,7 +590,7 @@ MenuStructure()
 	self MenuOption("Fun Menu",15,"Song: NukeTown 3",::NukedSong3);
         break;
 }
-	self MainMenu("Theme Menu","Gr3Zz v5.0.2");
+	self MainMenu("Theme Menu",getMenuName());
 	self MenuOption("Theme Menu",0,"Default Theme",::doDefaultTheme);
 	self MenuOption("Theme Menu",1,"Blue Theme",::doBlue);
 	self MenuOption("Theme Menu",2,"Green Theme",::doGreen);
@@ -607,7 +598,7 @@ MenuStructure()
 	self MenuOption("Theme Menu",4,"Pink Theme",::doPink);
 	self MenuOption("Theme Menu",5,"Cyan Theme",::doCyan);
 	self MenuOption("Theme Menu",6,"Center Menu",::doMenuCenter);
-	self MainMenu("Teleport Menu","Gr3Zz v5.0.2");
+	self MainMenu("Teleport Menu",getMenuName());
 	switch(GetDvar( "mapname" )){
 	case "zm_transit": // Tranzit
 	self MenuOption("Teleport Menu",0,"Bus",::teleportToBus);
@@ -684,7 +675,7 @@ MenuStructure()
 	self MenuOption("Teleport Menu",8,"Yellow Garage",::teleporttoYellowGarage);
         break;
 }
-	self MainMenu("Power Ups","Gr3Zz v5.0.2");	
+	self MainMenu("Power Ups",getMenuName());	
 	self MenuOption("Power Ups",0,"Nuke Bomb",::doPNuke);
 	self MenuOption("Power Ups",1,"Max Ammo",::doPMAmmo);
 	self MenuOption("Power Ups",2,"Double Points",::doPDoublePoints);
@@ -718,7 +709,7 @@ MenuStructure()
 	self MenuOption("Power Ups",4,"Fire Sale",::GivePowerUp,"fire_sale");
         break;
 }
-	self MainMenu("Game Settings","Gr3Zz v5.0.2");
+	self MainMenu("Game Settings",getMenuName());
 	self MenuOption("Game Settings",0,"Open All Doors",::OpenAllTehDoors);
 	self MenuOption("Game Settings",1,"MysteryBox Everywhere",::AllBoxLocations);
 	self MenuOption("Game Settings",2,"MysteryBox Never Moves",::BoxStays);
@@ -736,7 +727,7 @@ MenuStructure()
 	self MenuOption("Game Settings",14,"Slow Zombies",::doSlowZombies);
 	self MenuOption("Game Settings",15,"Restart Match",::dorestartgame);
 	self MenuOption("Game Settings",16,"End Match",::doendgame);
-	self MainMenu("Clients Menu","Gr3Zz v5.0.2");
+	self MainMenu("Clients Menu",getMenuName());
 	for(p=0;p<level.players.size;p++)
 	{
 		player=level.players[p];
@@ -756,7 +747,7 @@ MenuStructure()
 	self MenuOption("Clients Functions",9,"Give GodMod",::PlayerGiveGodMod);
 	self MenuOption("Clients Functions",10,"Revive",::doRevivePlayer);
 	self MenuOption("Clients Functions",11,"Kick",::kickPlayer);
-	self MainMenu("All Clients","Gr3Zz v5.0.2");
+	self MainMenu("All Clients",getMenuName());
 	self MenuOption("All Clients",0,"All GodMod",::AllPlayerGiveGodMod);
 	self MenuOption("All Clients",1,"Teleport All To Me",::doTeleportAllToMe);
 	self MenuOption("All Clients",2,"Freeze All Position",::doFreeAllPosition);
@@ -779,11 +770,11 @@ MonitorPlayers()
 		wait .5;
 	}
 }
-MainMenu(Menu,Return)
+MainMenu(Menu, ret)
 {
 	self.Menu.System["GetMenu"]=Menu;
 	self.Menu.System["MenuCount"]=0;
-	self.Menu.System["MenuPrevious"][Menu]=Return;
+	self.Menu.System["MenuPrevious"][Menu]=ret;
 }
 MenuOption(Menu,Num,text,Func,Inpu)
 {
@@ -831,7 +822,7 @@ BuildMenu()
 		if(self SecondaryOffhandButtonPressed() && self.MenuOpen==false)
 		{
 			self OuvertureMenu();
-			self LoadMenu("Gr3Zz v5.0.2");
+			self LoadMenu(getMenuName());
 		}
 		else if (self MeleeButtonPressed() && self.MenuOpen==true)
 		{
@@ -842,9 +833,9 @@ BuildMenu()
 		{
 			if(isDefined(self.Menu.System["MenuPrevious"][self.Menu.System["MenuRoot"]]))
 			{
-                            self.Menu.System["MenuCurser"]=0;
-                            self SubMenu(self.Menu.System["MenuPrevious"][self.Menu.System["MenuRoot"]]);
-                            wait 0.5;
+				self.Menu.System["MenuCurser"]=0;
+				self SubMenu(self.Menu.System["MenuPrevious"][self.Menu.System["MenuRoot"]]);
+				wait 0.5;
 			}
 		}
 		else if (self AdsButtonPressed() && self.MenuOpen==true)
@@ -852,7 +843,7 @@ BuildMenu()
 			self.Menu.System["MenuCurser"]-=1;
 			if (self.Menu.System["MenuCurser"]<0)
 			{
-                            self.Menu.System["MenuCurser"]=self.Menu.System["MenuTexte"][self.Menu.System["MenuRoot"]].size-1;
+				self.Menu.System["MenuCurser"]=self.Menu.System["MenuTexte"][self.Menu.System["MenuRoot"]].size-1;
 			}
 			self.Menu.Material["Scrollbar"] elemMoveY(.2,60+(self.Menu.System["MenuCurser"] * 15.6));
 			wait.2;
@@ -862,7 +853,7 @@ BuildMenu()
 			self.Menu.System["MenuCurser"]+=1;
 			if (self.Menu.System["MenuCurser"] >= self.Menu.System["MenuTexte"][self.Menu.System["MenuRoot"]].size)
 			{
-                            self.Menu.System["MenuCurser"]=0;
+				self.Menu.System["MenuCurser"]=0;
 			}
 			self.Menu.Material["Scrollbar"] elemMoveY(.2,60+(self.Menu.System["MenuCurser"] * 15.6));
 			wait.2;
@@ -877,6 +868,7 @@ BuildMenu()
 		wait 0.05;
 	}
 }
+
 SubMenu(input)
 {
 	self.Menu.System["MenuCurser"]=0;
@@ -890,7 +882,7 @@ SubMenu(input)
 		self.Menu.System["Title"] destroy();
 		player=level.players[self.Menu.System["ClientIndex"]];
 		self.Menu.System["Title"]=self createFontString("default",2.0);
-		self.Menu.System["Title"] setPoint("LEFT","TOP",125,30);
+		self.Menu.System["Title"] setPoint("LEFT","TOP",self.textpos,30);
 		self.Menu.System["Title"] setText("["+player.MyAccess+"^7] "+player.name);
 		self.Menu.System["Title"].sort=3;
 		self.Menu.System["Title"].alpha=1;
@@ -898,6 +890,7 @@ SubMenu(input)
 		self.Menu.System["Title"].glowAlpha=1;
 	}
 }
+
 LoadMenu(menu)
 {
 	self.Menu.System["MenuCurser"]=0;
@@ -918,6 +911,7 @@ LoadMenu(menu)
 	self.Menu.System["Texte"].alpha=1;
 	self.Menu.Material["Scrollbar"] elemMoveY(.2,60+(self.Menu.System["MenuCurser"] * 15.6));
 }
+
 Shader(align,relative,x,y,width,height,colour,shader,sort,alpha)
 {
 	hud=newClientHudElem(self);
@@ -931,6 +925,7 @@ Shader(align,relative,x,y,width,height,colour,shader,sort,alpha)
 	hud setPoint(align,relative,x,y);
 	return hud;
 }
+
 MenuDeath()
 {
 	self waittill("death");
@@ -941,26 +936,52 @@ MenuDeath()
 	self.Menu.Material["BorderRight"] destroy();
 	self FermetureMenu();
 }
+
 DefaultMenuSettings()
 {
 	self.glowtitre=(1,0,0);
-	self.textpos=125;
-	self.Menu.Material["Background"] elemMoveX(1,120);
-	self.Menu.Material["Scrollbar"] elemMoveX(1,120);
-	self.Menu.Material["BorderMiddle"] elemMoveX(1,120);
-	self.Menu.Material["BorderLeft"] elemMoveX(1,119);
-	self.Menu.Material["BorderRight"] elemMoveX(1,360);
-	self.Menu.System["Title"] elemMoveX(1,125);
-	self.Menu.System["Texte"] elemMoveX(1,125);
+	
+	self.MenuWidth = 240; 
+	self.MenuHeight = 580; // Make sure this matches the height above
+	self.MenuX = 120;     
+	self.TextOffset = 5;  
+	
+	leftBorderX = self.MenuX - 1;
+	rightBorderX = self.MenuX + self.MenuWidth;
+	self.textpos = self.MenuX + self.TextOffset;
+
+	self.Menu.Material["Background"] elemMoveX(1, self.MenuX);
+	self.Menu.Material["Scrollbar"] elemMoveX(1, self.MenuX);
+	self.Menu.Material["BorderMiddle"] elemMoveX(1, self.MenuX);
+	self.Menu.Material["BorderLeft"] elemMoveX(1, leftBorderX);
+	self.Menu.Material["BorderRight"] elemMoveX(1, rightBorderX);
+	self.Menu.System["Title"] elemMoveX(1, self.textpos);
+	self.Menu.System["Texte"] elemMoveX(1, self.textpos);
 }
+
 InitialisingMenu()
 {
-	self.Menu.Material["Background"]=self Shader("LEFT","TOP",120,0,240,803,(1,1,1),"black",0,0);
-	self.Menu.Material["Scrollbar"]=self Shader("LEFT","TOP",120,60,240,15,(1,0,0),"white",1,0);
-	self.Menu.Material["BorderMiddle"]=self Shader("LEFT","TOP",120,50,240,1,(1,0,0),"white",1,0);
-	self.Menu.Material["BorderLeft"]=self Shader("LEFT","TOP",119,0,1,803,(1,0,0),"white",1,0);
-	self.Menu.Material["BorderRight"]=self Shader("LEFT","TOP",360,0,1,803,(1,0,0),"white",1,0);
+	// ==========================================
+	// RESOLUTION CONFIGURATION CONFIG
+	// ==========================================
+	self.MenuWidth = 240;  
+	self.MenuHeight = 580; // Increased from 480 to fit your long text list cleanly
+	self.MenuX = 120;      
+	self.TextOffset = 5;   
+	
+	// Auto-calculated boundaries using LEFT alignment
+	leftBorderX = self.MenuX - 1;
+	rightBorderX = self.MenuX + self.MenuWidth;
+	self.textpos = self.MenuX + self.TextOffset;
+
+	// Anchored to "LEFT", "TOP"
+	self.Menu.Material["Background"]=self Shader("LEFT","TOP",self.MenuX,0,self.MenuWidth,self.MenuHeight,(1,1,1),"black",0,0);
+	self.Menu.Material["Scrollbar"]=self Shader("LEFT","TOP",self.MenuX,60,self.MenuWidth,15,(1,0,0),"white",1,0);
+	self.Menu.Material["BorderMiddle"]=self Shader("LEFT","TOP",self.MenuX,50,self.MenuWidth,1,(1,0,0),"white",1,0);
+	self.Menu.Material["BorderLeft"]=self Shader("LEFT","TOP",leftBorderX,0,1,self.MenuHeight,(1,0,0),"white",1,0);
+	self.Menu.Material["BorderRight"]=self Shader("LEFT","TOP",rightBorderX,0,1,self.MenuHeight,(1,0,0),"white",1,0);
 }
+
 doProgressBar()
 {
 	wduration=2.5;
@@ -973,6 +994,7 @@ doProgressBar()
 	wait .1;
 	self thread NewsBarDestroy(self.Menu.System["Progresse Bar"]);
 }
+
 OuvertureMenu()
 {
 	MyWeapon=self getCurrentWeapon();
@@ -991,6 +1013,7 @@ OuvertureMenu()
 	self.Menu.Material["BorderLeft"] elemFade(.5,0.6);
 	self.Menu.Material["BorderRight"] elemFade(.5,0.6);
 }
+
 FermetureMenu()
 {
 	self setclientuivisibilityflag("hud_visible",1);
@@ -1701,8 +1724,8 @@ zombie_blood_powerup( m_powerup, e_player )
 	e_player.zombie_vars[ "zombie_powerup_zombie_blood_time" ] = 30;
 	e_player.zombie_vars[ "zombie_powerup_zombie_blood_on" ] = 1;
 	level notify( "player_zombie_blood" );
-	maps/mp/_visionset_mgr::vsmgr_activate( "visionset", "zm_powerup_zombie_blood_visionset", e_player );
-	maps/mp/_visionset_mgr::vsmgr_activate( "overlay", "zm_powerup_zombie_blood_overlay", e_player );
+	maps\mp\_visionset_mgr::vsmgr_activate( "visionset", "zm_powerup_zombie_blood_visionset", e_player );
+	maps\mp\_visionset_mgr::vsmgr_activate( "overlay", "zm_powerup_zombie_blood_overlay", e_player );
 	e_player setclientfield( "player_zombie_blood_fx", 1 );
 	__new = [];
 	_a73 = level.a_zombie_blood_entities;
@@ -1773,8 +1796,8 @@ zombie_blood_powerup( m_powerup, e_player )
 		e_player playsound( "vox_plr_" + e_player.characterindex + "_exert_grunt_" + randomintrange( 0, 3 ) );
 	}
 	e_player.m_fx delete();
-	maps/mp/_visionset_mgr::vsmgr_deactivate( "visionset", "zm_powerup_zombie_blood_visionset", e_player );
-	maps/mp/_visionset_mgr::vsmgr_deactivate( "overlay", "zm_powerup_zombie_blood_overlay", e_player );
+	maps\mp\_visionset_mgr::vsmgr_deactivate( "visionset", "zm_powerup_zombie_blood_visionset", e_player );
+	maps\mp\_visionset_mgr::vsmgr_deactivate( "overlay", "zm_powerup_zombie_blood_overlay", e_player );
 	e_player.zombie_vars[ "zombie_powerup_zombie_blood_on" ] = 0;
 	e_player.zombie_vars[ "zombie_powerup_zombie_blood_time" ] = 30;
 	e_player._show_solo_hud = 0;
@@ -1982,12 +2005,12 @@ zombie_punch_damage( ai_zombie, n_mod )
 							}
 							tag = "J_SpineUpper";
 							network_safe_play_fx_on_tag( "lightning_impact", 2, level._effect[ "lightning_impact" ], ai_zombie, tag );
-							ai_zombie thread maps/mp/zombies/_zm_audio::do_zombies_playvocals( "electrocute", ai_zombie.animname );
+							ai_zombie thread maps\mp\zombies\_zm_audio::do_zombies_playvocals( "electrocute", ai_zombie.animname );
 							break;
 					}
 				}
 		}
-		else self maps/mp/zombies/_zm_score::player_add_points( "damage_light" );
+		else self maps\mp\zombies\_zm_score::player_add_points( "damage_light" );
 		if ( isDefined( self.b_punch_upgraded ) && self.b_punch_upgraded && isDefined( self.str_punch_element ) )
 		{
 			switch( self.str_punch_element )
@@ -2038,7 +2061,7 @@ zombie_punch_death( ai_zombie )
 gib_zombies_head( player )
 {
 	player endon( "disconnect" );
-	self maps/mp/zombies/_zm_spawner::zombie_head_gib();
+	self maps\mp\zombies\_zm_spawner::zombie_head_gib();
 }
 //Origins Flame Affects
 flame_damage_fx( damageweapon, e_attacker, pct_damage )
@@ -2112,14 +2135,14 @@ do_damage_network_safe( e_attacker, n_amount, str_weapon, str_mod )
 		if ( n_amount < self.health )
 		{
 			self.kill_damagetype = str_mod;
-			maps/mp/zombies/_zm_net::network_safe_init( "dodamage", 6 );
+			maps\mp\zombies\_zm_net::network_safe_init( "dodamage", 6 );
 			self thread damage_zombie_network_safe_internal( e_attacker, str_weapon, n_amount );
 			return;
 		}
 		else
 		{
 			self.kill_damagetype = str_mod;
-			maps/mp/zombies/_zm_net::network_safe_init( "dodamage_kill", 4 );
+			maps\mp\zombies\_zm_net::network_safe_init( "dodamage_kill", 4 );
 			self thread kill_zombie_network_safe_internal( e_attacker, str_weapon );
 		}
 	}
@@ -2233,7 +2256,7 @@ zombie_set_and_restore_flame_state()
 //Origins Flame Affects
 fire_stun_zombie_choked( do_stun, run_cycle )
 {
-	maps/mp/zombies/_zm_net::network_safe_init( "fire_stun", 2 );
+	maps\mp\zombies\_zm_net::network_safe_init( "fire_stun", 2 );
 	self thread fire_stun_zombie_internal( do_stun, run_cycle );
 }
 //Origins Flame Affects
@@ -2266,7 +2289,7 @@ flame_damage_over_time( e_attacker, damageweapon, pct_damage )
 	{
 		if ( isDefined( e_attacker ) && isplayer( e_attacker ) )
 		{
-			if ( e_attacker maps/mp/zombies/_zm_powerups::is_insta_kill_active() )
+			if ( e_attacker maps\mp\zombies\_zm_powerups::is_insta_kill_active() )
 			{
 				n_damage = self.health;
 			}
@@ -2337,7 +2360,7 @@ ice_affect_zombie( str_weapon, e_player, always_kill, n_mod )
 		n_mod = 1;
 	}
 	self endon( "death" );
-	instakill_on = e_player maps/mp/zombies/_zm_powerups::is_insta_kill_active();
+	instakill_on = e_player maps\mp\zombies\_zm_powerups::is_insta_kill_active();
 	if ( str_weapon == "staff_water_zm" )
 	{
 		n_damage = 2050;
@@ -2402,7 +2425,7 @@ staff_water_kill_zombie( player, str_weapon )
 	{
 		self thread frozen_zombie_shatter();
 	}
-	player maps/mp/zombies/_zm_score::player_add_points( "death", "", "" );
+	player maps\mp\zombies\_zm_score::player_add_points( "death", "", "" );
 }
 //Origins Ice Affects
 set_anim_rate( n_speed )
@@ -2521,7 +2544,7 @@ stun_zombie() //checked matches cerberus output
 	{
 		self animscripted( self.origin, self.angles, "zm_electric_stun" );
 	}
-	self maps/mp/animscripts/shared::donotetracks( "stunned" );
+	self maps\mp\animscripts\shared::donotetracks( "stunned" );
 	self.forcemovementscriptstate = 0;
 	self.ignoreall = 0;
 	self.is_electrocuted = 0;
@@ -2609,7 +2632,7 @@ doequipment_give(i)
 {
   self endon("death");
   self endon("disconnect");
-  self maps/mp/zombies/_zm_equipment::equipment_buy(i);
+  self maps\mp\zombies\_zm_equipment::equipment_buy(i);
 }
 Toma(i)
 {
@@ -2630,15 +2653,12 @@ domonkey()
 }
 monkey_monkey()
 {
-  if ( maps/mp/zombies/_zm_weap_cymbal_monkey::cymbal_monkey_exists() )
-  {
-  if ( loadout.zombie_cymbal_monkey_count )
-  {
-  self maps/mp/zombies/_zm_weap_cymbal_monkey::player_give_cymbal_monkey();
-  self setweaponammoclip( "cymbal_monkey_zm", loadout.zombie_cymbal_monkey_count );
-  }
-  self iPrintln("^7Monkeys ^2Given");
-  }
+    if ( maps\mp\zombies\_zm_weap_cymbal_monkey::cymbal_monkey_exists() )
+    {
+        self maps\mp\zombies\_zm_weap_cymbal_monkey::player_give_cymbal_monkey();
+        self setweaponammoclip( "cymbal_monkey_zm", 3 );
+        self iPrintln("^7Monkeys ^2Given");
+    }
 }
 dolethal(i)
 {
@@ -2666,7 +2686,7 @@ doclaymore()
   self set_player_placeable_mine( "claymore_zm" );
   self setactionslot( 4, "weapon", "claymore_zm" );
   self setweaponammostock( "claymore_zm", 2 );
-  self thread maps/mp/zombies/_zm_weap_claymore::claymore_setup();
+  self thread maps\mp\zombies\_zm_weap_claymore::claymore_setup();
   self iprintln("Claymores ^2Given");
 }
 doTime()
@@ -2689,7 +2709,7 @@ dobeacon()
 {
   self endon("death");
   self endon("disconnect");
-  self maps/mp/zombies/_zm_weapons::weapon_give( "beacon_zm" );
+  self maps\mp\zombies\_zm_weapons::weapon_give( "beacon_zm" );
 
   self iPrintln("^7Air Strike ^2Given");
 }
@@ -3322,7 +3342,7 @@ OpenAllTehDoors()
 			if(GetDvar("mapname") == "zm_tomb") // Origins
 			{
 				Trigger[b] notify("trigger");
-        		Trigger[b] maps/mp/zombies/_zm_blockers::door_opened(0);
+        		Trigger[b] maps\mp\zombies\_zm_blockers::door_opened(0);
 			}
 		}
 	}
@@ -3361,11 +3381,11 @@ powerp()
 		clientnotify( "power_on" );
 		flag_set("power_on");
 		level setclientfield( "zombie_power_on", 1 );
-		level thread maps/mp/zombies/_zm_perks::perk_unpause_all_perks();
+		level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
 		self iprintln("Power ^2On!");
 		if(GetDvar("mapname") == "zm_transit") //Transit
 		{
-		self thread maps/mp/zombies/_zm_game_module::turn_power_on_and_open_doors();
+		self thread maps\mp\zombies\_zm_game_module::turn_power_on_and_open_doors();
 		self iPrintln("^7PAP Power ^2ON");
 		}
 }
@@ -3383,7 +3403,7 @@ powerb()
 		powerswitch playsound( "zmb_switch_flip" );
 		powerswitch playsound( "zmb_poweron" );
 		level setclientfield( "zombie_power_on", 1 );
-		level thread maps/mp/zombies/_zm_perks::perk_unpause_all_perks();
+		level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
 		powerswitch waittill( "rotatedone" );
 		playfx( level._effect[ "switch_sparks"], powerswitch.origin + ( 0, 12, -60 ), anglestoforward( powerswitch.angles ) );
 		powerswitch playsound( "zmb_turn_on" );
@@ -3395,7 +3415,7 @@ powerb()
 powerpm()
 {
 	self endon("disconnect");
-    	maps/mp/zombies/_zm_game_module::turn_power_on_and_open_doors();
+    	maps\mp\zombies\_zm_game_module::turn_power_on_and_open_doors();
     	wait 1;
     	flag_set( "power_on" );
 		clientnotify( "power_on" );
@@ -3425,7 +3445,7 @@ powero()
 		flag_set("power_on");
 		level setclientfield( "zombie_power_on", 1 );
 		level setclientfield( "zone_capture_hud_all_generators_captured", 1 );
-		level thread maps/mp/zombies/_zm_perks::perk_unpause_all_perks();
+		level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
 }
 //Origins Generator Power
 turn_on_power()
@@ -3474,7 +3494,7 @@ enable_perk_machines()
 	level notify( a_keys[ i ] + "_on" );
 	e_perk_trigger = self.perk_machines[ a_keys[ i ] ];
 	e_perk_trigger.is_locked = 0;
-	e_perk_trigger maps/mp/zombies/_zm_perks::reset_vending_hint_string();
+	e_perk_trigger maps\mp\zombies\_zm_perks::reset_vending_hint_string();
 	i++;
 }
 //Origins WF Power
@@ -3681,11 +3701,11 @@ dogs_fed()
   }
   flag_set( "soul_catchers_charged" );
   level notify( "soul_catchers_charged" );
-  level thread maps/mp/zombies/_zm_audio::sndmusicstingerevent( "quest_generic" );
+  level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent( "quest_generic" );
 }
 give_money()
 {
-	self maps/mp/zombies/_zm_score::add_to_player_score(100000);
+	self maps\mp\zombies\_zm_score::add_to_player_score(100000);
 }
 NoTarget()
 {
@@ -4089,8 +4109,8 @@ buildbuildable( buildable, craft )
 			{
 				if (craft)
 				{
-					stub maps/mp/zombies/_zm_buildables::buildablestub_finish_build( player );
-					stub maps/mp/zombies/_zm_buildables::buildablestub_remove();
+					stub maps\mp\zombies\_zm_buildables::buildablestub_finish_build( player );
+					stub maps\mp\zombies\_zm_buildables::buildablestub_remove();
 					stub.model notsolid();
 					stub.model show();
 				}
@@ -4104,10 +4124,10 @@ buildbuildable( buildable, craft )
 				i = 0;
 				foreach (piece in stub.buildablezone.pieces)
 				{
-					piece maps/mp/zombies/_zm_buildables::piece_unspawn();
+					piece maps\mp\zombies\_zm_buildables::piece_unspawn();
 					if (!craft && i > 0)
 					{
-						stub.buildablezone maps/mp/zombies/_zm_buildables::buildable_set_piece_built(piece);
+						stub.buildablezone maps\mp\zombies\_zm_buildables::buildable_set_piece_built(piece);
 					}
 					i++;
 				}
@@ -4260,7 +4280,7 @@ removebuildable( buildable, after_built )
 			if(IsDefined(stub.equipname) && stub.equipname == buildable)
 			{
 				stub.model hide();
-				maps/mp/zombies/_zm_unitrigger::unregister_unitrigger( stub );
+				maps\mp\zombies\_zm_unitrigger::unregister_unitrigger( stub );
 				return;
 			}
 		}
@@ -4273,12 +4293,12 @@ removebuildable( buildable, after_built )
 			{
 				if ( isDefined( buildable ) || stub.persistent != 3 )
 				{
-					stub maps/mp/zombies/_zm_buildables::buildablestub_remove();
+					stub maps\mp\zombies\_zm_buildables::buildablestub_remove();
 					foreach (piece in stub.buildablezone.pieces)
 					{
-						piece maps/mp/zombies/_zm_buildables::piece_unspawn();
+						piece maps\mp\zombies\_zm_buildables::piece_unspawn();
 					}
-					maps/mp/zombies/_zm_unitrigger::unregister_unitrigger( stub );
+					maps\mp\zombies\_zm_unitrigger::unregister_unitrigger( stub );
 					return;
 				}
 			}
@@ -4362,7 +4382,7 @@ buildabletrigger_update_prompt( player )
 
 pooledbuildablestub_update_prompt( player, trigger )
 {
-	if ( !self maps/mp/zombies/_zm_buildables::anystub_update_prompt( player ) )
+	if ( !self maps\mp\zombies\_zm_buildables::anystub_update_prompt( player ) )
 	{
 		return 0;
 	}
@@ -4399,9 +4419,9 @@ pooledbuildablestub_update_prompt( player, trigger )
 			}
 		}
 
-		player maps/mp/zombies/_zm_buildables::player_set_buildable_piece(piece, slot);
+		player maps\mp\zombies\_zm_buildables::player_set_buildable_piece(piece, slot);
 
-		piece = player maps/mp/zombies/_zm_buildables::player_get_buildable_piece(slot);
+		piece = player maps\mp\zombies\_zm_buildables::player_get_buildable_piece(slot);
 
 		if ( !isDefined( piece ) )
 		{
@@ -4422,7 +4442,7 @@ pooledbuildablestub_update_prompt( player, trigger )
 		}
 		else
 		{
-			if ( isDefined( self.bound_to_buildable ) && !self.bound_to_buildable.buildablezone maps/mp/zombies/_zm_buildables::buildable_has_piece( piece ) )
+			if ( isDefined( self.bound_to_buildable ) && !self.bound_to_buildable.buildablezone maps\mp\zombies\_zm_buildables::buildable_has_piece( piece ) )
 			{
 				if ( isDefined( level.zombie_buildables[ self.bound_to_buildable.equipname ].hint_wrong ) )
 				{
@@ -4488,7 +4508,7 @@ pooledbuildablestub_update_prompt( player, trigger )
 
 buildablestub_update_prompt( player, trigger )
 {
-	if ( !self maps/mp/zombies/_zm_buildables::anystub_update_prompt( player ) )
+	if ( !self maps\mp\zombies\_zm_buildables::anystub_update_prompt( player ) )
 	{
 		return 0;
 	}
@@ -4513,9 +4533,9 @@ buildablestub_update_prompt( player, trigger )
 	{
 		slot = self.buildablestruct.buildable_slot;
 		piece = self.buildablezone.pieces[0];
-		player maps/mp/zombies/_zm_buildables::player_set_buildable_piece(piece, slot);
+		player maps\mp\zombies\_zm_buildables::player_set_buildable_piece(piece, slot);
 
-		if ( !isDefined( player maps/mp/zombies/_zm_buildables::player_get_buildable_piece( slot ) ) )
+		if ( !isDefined( player maps\mp\zombies\_zm_buildables::player_get_buildable_piece( slot ) ) )
 		{
 			if ( isDefined( level.zombie_buildables[ self.equipname ].hint_more ) )
 			{
@@ -4529,7 +4549,7 @@ buildablestub_update_prompt( player, trigger )
 		}
 		else
 		{
-			if ( !self.buildablezone maps/mp/zombies/_zm_buildables::buildable_has_piece( player maps/mp/zombies/_zm_buildables::player_get_buildable_piece( slot ) ) )
+			if ( !self.buildablezone maps\mp\zombies\_zm_buildables::buildable_has_piece( player maps\mp\zombies\_zm_buildables::player_get_buildable_piece( slot ) ) )
 			{
 				if ( isDefined( level.zombie_buildables[ self.equipname ].hint_wrong ) )
 				{
@@ -4558,7 +4578,7 @@ buildablestub_update_prompt( player, trigger )
 	{
 		if ( self.persistent == 1 )
 		{
-			if ( maps/mp/zombies/_zm_equipment::is_limited_equipment( self.weaponname ) && maps/mp/zombies/_zm_equipment::limited_equipment_in_use( self.weaponname ) )
+			if ( maps\mp\zombies\_zm_equipment::is_limited_equipment( self.weaponname ) && maps\mp\zombies\_zm_equipment::limited_equipment_in_use( self.weaponname ) )
 			{
 				self.hint_string = &"ZOMBIE_BUILD_PIECE_ONLY_ONE";
 				return 0;
@@ -4574,7 +4594,7 @@ buildablestub_update_prompt( player, trigger )
 		}
 		else if ( self.persistent == 2 )
 		{
-			if ( !maps/mp/zombies/_zm_weapons::limited_weapon_below_quota( self.weaponname, undefined ) )
+			if ( !maps\mp\zombies\_zm_weapons::limited_weapon_below_quota( self.weaponname, undefined ) )
 			{
 				self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
 				return 0;
@@ -4605,7 +4625,7 @@ buildablestub_build_succeed()
 
 	self waittill( "build_succeed" );
 
-	self.stub maps/mp/zombies/_zm_buildables::buildablestub_remove();
+	self.stub maps\mp\zombies\_zm_buildables::buildablestub_remove();
 	arrayremovevalue(level.buildables_available, self.stub.buildablezone.buildable_name);
 	if (level.buildables_available.size == 0)
 	{
@@ -4617,7 +4637,7 @@ buildablestub_build_succeed()
 				case "subwoofer_zm":
 				case "springpad_zm":
 				case "headchopper_zm":
-					maps/mp/zombies/_zm_unitrigger::unregister_unitrigger(stub);
+					maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(stub);
 					break;
 			}
 		}
@@ -4698,7 +4718,7 @@ choose_open_buildable( player )
 				}
 			}
 			slot = self.buildablestruct.buildable_slot;
-			player maps/mp/zombies/_zm_buildables::player_set_buildable_piece(piece, slot);
+			player maps\mp\zombies\_zm_buildables::player_set_buildable_piece(piece, slot);
 
 			self.equipname = level.buildables_available[self.buildables_available_index];
 			self.hint_string = level.zombie_buildables[self.equipname].hint;
@@ -4732,7 +4752,7 @@ pooledbuildable_stub_for_piece( piece )
 	{
 		if ( !isDefined( stub.bound_to_buildable ) )
 		{
-			if ( stub.buildablezone maps/mp/zombies/_zm_buildables::buildable_has_piece( piece ) )
+			if ( stub.buildablezone maps\mp\zombies\_zm_buildables::buildable_has_piece( piece ) )
 			{
 				return stub;
 			}
@@ -4820,7 +4840,7 @@ NoLavaDamage()
 	{
 		p notify("stop_flame_damage");
 		p.is_burning = 1;
-		p maps/mp/_visionset_mgr::vsmgr_deactivate("overlay", "zm_transit_burn", p);
+		p maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_transit_burn", p);
 	}
 	self iprintln("No Lava Damage!");
 }
@@ -4835,7 +4855,7 @@ weapondrop()
 }
 doPerks(a)
 {
-	self maps/mp/zombies/_zm_perks::give_perk(a);
+	self maps\mp\zombies\_zm_perks::give_perk(a);
 	self iPrintln("Perk: "+self.Menu.System["MenuTexte"][self.Menu.System["MenuRoot"]][self.Menu.System["MenuCurser"]]+" ^2Given");
 }
 giveallperks()
@@ -4844,51 +4864,51 @@ giveallperks()
 	
 	if(isdefined(level.zombiemode_using_juggernaut_perk) && level.zombiemode_using_juggernaut_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_armorvest");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_armorvest");
 	}
 	if(isdefined(level.zombiemode_using_sleightofhand_perk) && level.zombiemode_using_sleightofhand_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_fastreload");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_fastreload");
 	}
 	if(isdefined(level.zombiemode_using_revive_perk) && level.zombiemode_using_revive_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_quickrevive");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_quickrevive");
 	}
 	if(isdefined(level.zombiemode_using_doubletap_perk) && level.zombiemode_using_doubletap_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_rof");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_rof");
 	}
 	if(isdefined(level.zombiemode_using_marathon_perk) && level.zombiemode_using_marathon_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_longersprint");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_longersprint");
 	}
 	if(isdefined(level.zombiemode_using_additionalprimaryweapon_perk) && level.zombiemode_using_additionalprimaryweapon_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_additionalprimaryweapon");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_additionalprimaryweapon");
 	}
 	if(isdefined(level.zombiemode_using_deadshot_perk) && level.zombiemode_using_deadshot_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_deadshot");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_deadshot");
 	}
 	if(isdefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_scavenger");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_scavenger");
 	}
 	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_flakjacket"]))
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_flakjacket");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_flakjacket");
 	}
 	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_nomotionsensor"]))
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_nomotionsensor");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_nomotionsensor");
 	}
 	if(isdefined(level._custom_perks) && isdefined(level._custom_perks["specialty_grenadepulldeath"]))
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_grenadepulldeath");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_grenadepulldeath");
 	}
 	if(isdefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk)
 	{
-		self maps/mp/zombies/_zm_perks::give_perk("specialty_finalstand");
+		self maps\mp\zombies\_zm_perks::give_perk("specialty_finalstand");
 	}
 }
 removeallperks()
@@ -4943,10 +4963,10 @@ GivePowerUp(powerup_name)
     else
     {
         level.powerup_drop_count = 0;
-        powerup = level maps/mp/zombies/_zm_powerups::specific_powerup_drop(powerup_name, self.origin);
+        powerup = level maps\mp\zombies\_zm_powerups::specific_powerup_drop(powerup_name, self.origin);
         if (powerup_name == "teller_withdrawl")
             powerup.value = 1000;
-        powerup thread maps/mp/zombies/_zm_powerups::powerup_timeout();
+        powerup thread maps\mp\zombies\_zm_powerups::powerup_timeout();
         self iprintln("PowerUps (" + powerup_name + ") ^2Gived^7");
     }
 }
@@ -4989,15 +5009,6 @@ doPInstaKills()
 	}
 	self iPrintln("Insta Kill ^2Sent");
 }
-doPInstaKills()
-{
-	foreach(player in level.players)
-	{
-		level thread maps\mp\zombies\_zm_powerups::insta_kill_powerup(self,player);
-		player thread maps\mp\zombies\_zm_powerups::powerup_vo("insta_kill");
-	}
-	self iPrintln("Insta Kill ^2Sent");
-}
 doPRandomWeapon()
 {
 	foreach(player in level.players)
@@ -5024,29 +5035,6 @@ doNoSpawnZombies()
 		flag_init("spawn_zombies",1);
 		self thread ZombieKill();
 		self iPrintln("Disable Zombies [^1OFF^7]");
-	}
-}
-PlayerFrezeControl()
-{
-	player=level.players[self.Menu.System["ClientIndex"]];
-	if(player isHost())
-	{
-		self iPrintln("You can't freeze the host!");
-	}
-	else
-	{
-		if(self.fronzy==false)
-		{
-			self.fronzy=true;
-			self iPrintln("^2Frozen: ^7"+player.name);
-			player freezeControls(true);
-		}
-		else
-		{
-			self.fronzy=false;
-			self iPrintln("^1Unfrozen: ^7"+player.name);
-			player freezeControls(false);
-		}
 	}
 }
 doTeleportAllToMe()
@@ -5312,325 +5300,96 @@ dogoldhelmet()
   }
   self iPrintln("^2Golden Helmet ^1Given");
 }
-dorestartgame()
-{
-	self iprintln("Restarting Game in a few seconds");
-	wait 3;
-	map_restart( 0 );
 
-}
-doendgame()
-{
-	self iprintln("Ending Current Game");
-	level notify( "end_game" );
+dorestartgame() { self iprintln("Restarting Game in a few seconds"); wait 3; map_restart( 0 ); }
+doendgame() { self iprintln("Ending Current Game"); level notify( "end_game" ); }
 
-}
-EasterEggSong()
-{
-    self playsound( "mus_zmb_secret_song" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
-EasterEggSong2()
-{
-    self playsound( "mus_zmb_secret_song_2" );
-    self iprintlnbold( "Easter Egg Song #2 ^2Played" );
-}
-OriginsSong2()
-{
-    self playsound( "mus_zmb_secret_song_a7x" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
-OriginsSong3()
-{
-    self playsound( "mus_zmb_secret_song_aether" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
-NukedSong1()
-{
-    self playsound( "zmb_nuked_song_1" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
-NukedSong2()
-{
-    self playsound( "zmb_nuked_song_2" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
-NukedSong3()
-{
-    self playsound( "zmb_nuked_song_3" );
-    self iprintlnbold( "Easter Egg Song ^2Played" );
-}
+EasterEggSong() { self playsound( "mus_zmb_secret_song" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
+EasterEggSong2() { self playsound( "mus_zmb_secret_song_2" ); self iprintlnbold( "Easter Egg Song #2 ^2Played" ); }
+OriginsSong2() { self playsound( "mus_zmb_secret_song_a7x" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
+OriginsSong3() { self playsound( "mus_zmb_secret_song_aether" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
+NukedSong1() { self playsound( "zmb_nuked_song_1" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
+NukedSong2() { self playsound( "zmb_nuked_song_2" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
+NukedSong3() { self playsound( "zmb_nuked_song_3" ); self iprintlnbold( "Easter Egg Song ^2Played" ); }
 
 // Tranzit Coords
-teleportToBus()
-{
-   self setOrigin(level.the_bus localToWorldCoords((0, 0, 25)));
-}
-teleporttoBusStop()
-{
-    teleportPlayer(self, (-6359.23, 5606.84, -43.793), (0, -140.625, 0));
-}
-teleporttoTunnel()
-{
-    teleportPlayer(self, (-11475, -2321, 200), (0, -61.3421, 0));
-}
-teleporttoDiner()
-{
-    teleportPlayer(self, (-5010, -7189, -57), (0, -156.648, 0));
-}
-teleportToDinerRoof()
-{
-    teleportPlayer(self, (-6377.36, -8004.36, 148.125), (0, 29.8943, 0));
-}
-teleporttoFarm()
-{
-    teleportPlayer(self, (8497.75, -5459.58, 47.8724), (0, -157.187, 0));
-}
-teleporttoNach()
-{
-    teleportPlayer(self, (13781, -1013, -185), (0, -119.652, 0));
-}
-teleporttoCornField()
-{
-    teleportPlayer(self, (10165.7, -1739.5, -219.201), (0, 102.272, 0));
-}
-teleporttoPowerStation()
-{
-    teleportPlayer(self, (11361.3, 7925.06, -537.939), (0, -147.047, 0));
-}
-teleporttoTown()
-{
-    teleportPlayer(self, (1167.49, -851.359, -55.875), (0, 75.487, 0));
-}
-teleportToHuntersCabin()
-{
-    teleportPlayer(self, (5385.36, 7064.36, -26.117), (0, -147.8, 0));
-}
-teleportToPackAPunchRoom()
-{
-    teleportPlayer(self, (1126.64, 1148.86, -303.875), (0, -87.1555, 0));
-}
+teleportToBus() { self setOrigin(level.the_bus localToWorldCoords((0, 0, 25))); }
+teleporttoBusStop() { teleportPlayer(self, (-6359.23, 5606.84, -43.793), (0, -140.625, 0)); }
+teleporttoTunnel() { teleportPlayer(self, (-11475, -2321, 200), (0, -61.3421, 0)); }
+teleporttoDiner() { teleportPlayer(self, (-5010, -7189, -57), (0, -156.648, 0)); }
+teleportToDinerRoof() { teleportPlayer(self, (-6377.36, -8004.36, 148.125), (0, 29.8943, 0)); }
+teleporttoFarm() { teleportPlayer(self, (8497.75, -5459.58, 47.8724), (0, -157.187, 0)); }
+teleporttoNach() { teleportPlayer(self, (13781, -1013, -185), (0, -119.652, 0)); }
+teleporttoCornField() { teleportPlayer(self, (10165.7, -1739.5, -219.201), (0, 102.272, 0)); }
+teleporttoPowerStation() { teleportPlayer(self, (11361.3, 7925.06, -537.939), (0, -147.047, 0)); }
+teleporttoTown() { teleportPlayer(self, (1167.49, -851.359, -55.875), (0, 75.487, 0)); }
+teleportToHuntersCabin() { teleportPlayer(self, (5385.36, 7064.36, -26.117), (0, -147.8, 0)); }
+teleportToPackAPunchRoom() { teleportPlayer(self, (1126.64, 1148.86, -303.875), (0, -87.1555, 0)); }
 
 // Buried Coords
-teleporttoBuriedSpawn()
-{
-    teleportPlayer(self, (-2689.08, -761.858, 1360.13), (0, 89.5203, 0));
-}
-teleporttoBuriedUnderGround()
-{
-    teleportPlayer(self, (-957.409, -351.905, 288.125), (0, -1.7761, 0));
-}
-teleporttoBankHouse()
-{
-    teleportPlayer(self, (-386.859, -243.884, 8.125), (0, 88.8611, 0));
-}
-teleporttoLeroyCell()
-{
-    teleportPlayer(self, (-1081.72, 830.04, 8.125), (0, -89.7766, 0));
-}
-teleporttoBarSaloon()
-{
-    teleportPlayer(self, (790.854, -1433.25, 56.125), (0, 140.645, 0));
-}
-teleporttoBuriedPower()
-{
-    teleportPlayer(self, (710.08, -591.387, 143.443), (0, 140.645, 0));
-}
-teleporttoBuriedChurch()
-{
-    teleportPlayer(self, (1532.91, 1962.69, 20.5159), (0, 72.442, 0));
-}
-teleporttoMansion()
-{
-    teleportPlayer(self, (1751.68, 545.036, -2.21781), (0, 1.16274, 0));
-}
-teleporttoMazeEnter()
-{
-    teleportPlayer(self, (3939.1, 584.876, 4.125), (0, -0.402809, 0));
-}
-teleporttoMazeExit()
-{
-    teleportPlayer(self, (5810, 571.574, 4.125), (0, 0.921043, 0));
-}
-teleporttoBuriedPac()
-{
-    teleportPlayer(self, (6410.24, 768.373, -132.351), (0, 138.662, 0));
-}
+teleporttoBuriedSpawn() { teleportPlayer(self, (-2689.08, -761.858, 1360.13), (0, 89.5203, 0)); }
+teleporttoBuriedUnderGround() { teleportPlayer(self, (-957.409, -351.905, 288.125), (0, -1.7761, 0)); }
+teleporttoBankHouse() { teleportPlayer(self, (-386.859, -243.884, 8.125), (0, 88.8611, 0)); }
+teleporttoLeroyCell() { teleportPlayer(self, (-1081.72, 830.04, 8.125), (0, -89.7766, 0)); }
+teleporttoBarSaloon() { teleportPlayer(self, (790.854, -1433.25, 56.125), (0, 140.645, 0)); }
+teleporttoBuriedPower() { teleportPlayer(self, (710.08, -591.387, 143.443), (0, 140.645, 0)); }
+teleporttoBuriedChurch() { teleportPlayer(self, (1532.91, 1962.69, 20.5159), (0, 72.442, 0)); }
+teleporttoMansion() { teleportPlayer(self, (1751.68, 545.036, -2.21781), (0, 1.16274, 0)); }
+teleporttoMazeEnter() { teleportPlayer(self, (3939.1, 584.876, 4.125), (0, -0.402809, 0)); }
+teleporttoMazeExit() { teleportPlayer(self, (5810, 571.574, 4.125), (0, 0.921043, 0)); }
+teleporttoBuriedPac() { teleportPlayer(self, (6410.24, 768.373, -132.351), (0, 138.662, 0)); }
 
 // Origins
-teleporttoTank()
-{
-    teleportPlayer(self, (160.635, -2755.65, 43.5474), (0, 12.9749, 0));
-}
-teleporttoTank2()
-{
-    teleportPlayer(self, (-86.3847, 4654.54, -288.052), (0, -178.198, 0));
-}
-teleporttoNoMansLand()
-{
-    teleportPlayer(self, (-760.179, 1121.94, 119.175), (0, -68.9996, 0));
-}
-teleporttoChurch()
-{
-    teleportPlayer(self, (459.258, -2644.85, 365.342), (0, -28.8776, 0));
-}
-teleporttoGen1()
-{
-    teleportPlayer(self, (2170.5, 4660.37, -299.875), (0, 90.5823, 0));
-}
-teleporttoGen2()
-{
-    teleportPlayer(self, (-356.707, 3579.11, -291.875), (0, -88.5004, 0));
-}
-teleporttoGen3()
-{
-    teleportPlayer(self, (518.721, 2500.87, -121.875), (0, -87.616, 0));
-}
-teleporttoGen4()
-{
-    teleportPlayer(self, (2372.42, 101.088, 120.125), (0,  91.4063, 0));
-}
-teleporttoGen5()
-{
-    teleportPlayer(self, (-2493.36, 178.245, 236.625), (0, -179.055, 0));
-}
-teleporttoGen6()
-{
-    teleportPlayer(self, (952.098, -3554.39, 306.125), (0, -88.1927, 0));
-}
-teleporttoCrazyPlaceAir()
-{
-    teleportPlayer(self, (11285.9, -8679.08, -407.875), (0, 149.266, 0));
-}
-teleporttoCrazyPlaceFire()
-{
-    teleportPlayer(self, (9429.59, -8560.03, -397.875), (0, 8.6023, 0));
-}
-teleporttoCrazyPlaceIce()
-{
-    teleportPlayer(self, (11242.1, -7033.06, -345.875), (0, -139.235, 0));
-}
-teleporttoCrazyPlaceLightning()
-{
-    teleportPlayer(self, (9621.84, -6989.4, -345.875), (0, -89.2969, 0));
-}
-teleporttoStaffRoom()
-{
-    teleportPlayer(self, (-3.77959, 7.99695, -751.875), (0, 88.8245, 0));
-}
-teleporttoOriginsPAP()
-{
-    teleportPlayer(self, (-199.079, -11.0947, 320.125), (0, 1.12611, 0));
-}
+teleporttoTank() { teleportPlayer(self, (160.635, -2755.65, 43.5474), (0, 12.9749, 0)); }
+teleporttoTank2() { teleportPlayer(self, (-86.3847, 4654.54, -288.052), (0, -178.198, 0)); }
+teleporttoNoMansLand() { teleportPlayer(self, (-760.179, 1121.94, 119.175), (0, -68.9996, 0)); }
+teleporttoChurch() { teleportPlayer(self, (459.258, -2644.85, 365.342), (0, -28.8776, 0)); }
+teleporttoGen1() { teleportPlayer(self, (2170.5, 4660.37, -299.875), (0, 90.5823, 0)); }
+teleporttoGen2() { teleportPlayer(self, (-356.707, 3579.11, -291.875), (0, -88.5004, 0)); }
+teleporttoGen3() { teleportPlayer(self, (518.721, 2500.87, -121.875), (0, -87.616, 0)); }
+teleporttoGen4() { teleportPlayer(self, (2372.42, 101.088, 120.125), (0, 91.4063, 0)); }
+teleporttoGen5() { teleportPlayer(self, (-2493.36, 178.245, 236.625), (0, -179.055, 0)); }
+teleporttoGen6() { teleportPlayer(self, (952.098, -3554.39, 306.125), (0, -88.1927, 0)); }
+teleporttoCrazyPlaceAir() { teleportPlayer(self, (11285.9, -8679.08, -407.875), (0, 149.266, 0)); }
+teleporttoCrazyPlaceFire() { teleportPlayer(self, (9429.59, -8560.03, -397.875), (0, 8.6023, 0)); }
+teleporttoCrazyPlaceIce() { teleportPlayer(self, (11242.1, -7033.06, -345.875), (0, -139.235, 0)); }
+teleporttoCrazyPlaceLightning() { teleportPlayer(self, (9621.84, -6989.4, -345.875), (0, -89.2969, 0)); }
+teleporttoStaffRoom() { teleportPlayer(self, (-3.77959, 7.99695, -751.875), (0, 88.8245, 0)); }
+teleporttoOriginsPAP() { teleportPlayer(self, (-199.079, -11.0947, 320.125), (0, 1.12611, 0)); }
 
 // MOTD Coords
-teleporttoSpawn()
-{
-    teleportPlayer(self, (1226, 10597, 1336), (0, -178.72, 0));
-}
-teleporttoStairCase()
-{
-    teleportPlayer(self, (114.84, 8122.72, 276.125), (0, 72.0656, 0));
-}
-teleporttoHarbor()
-{
-    teleportPlayer(self, (-425, 5418, -71), (0, 174.804, 0));
-}
-teleporttoDog1()
-{
-    teleportPlayer(self, (826.87, 9672.88, 1443.13), (0, 179.424, 0));
-}
-teleporttoDog2()
-{
-    teleportPlayer(self, (3731.16, 9705.97, 1532.84), (0, -2.81724, 0));
-}
-teleporttoDog3()
-{
-    teleportPlayer(self, (49.1354, 6093.95, 19.5609), (0, 103.003, 0));
-}
-teleporttoBridge()
-{
-    teleportPlayer(self, (-1246, -3497, -8447));
-}
+teleporttoSpawn() { teleportPlayer(self, (1226, 10597, 1336), (0, -178.72, 0)); }
+teleporttoStairCase() { teleportPlayer(self, (114.84, 8122.72, 276.125), (0, 72.0656, 0)); }
+teleporttoHarbor() { teleportPlayer(self, (-425, 5418, -71), (0, 174.804, 0)); }
+teleporttoDog1() { teleportPlayer(self, (826.87, 9672.88, 1443.13), (0, 179.424, 0)); }
+teleporttoDog2() { teleportPlayer(self, (3731.16, 9705.97, 1532.84), (0, -2.81724, 0)); }
+teleporttoDog3() { teleportPlayer(self, (49.1354, 6093.95, 19.5609), (0, 103.003, 0)); }
+teleporttoBridge() { teleportPlayer(self, (-1246, -3497, -8447)); }
 
 // Die Rise Coords
-teleporttoHighSpawn()
-{
-    teleportPlayer(self, (1464.25, 1377.69, 3397.46), (0, -49.442, 0));
-}
-teleporttoSlide()
-{
-    teleportPlayer(self, (2084.26, 2573.54, 3050.59), (0, -4.56284, 0));
-}
-teleporttoBrokenElevator()
-{
-    teleportPlayer(self, (3700.51, 2173.41, 2575.47), (0, -110.597, 0));
-}
-teleporttoRedRoom()
-{
-    teleportPlayer(self, (3176.08, 1426.12, 1298.53), (0, 0.739594, 0));
-}
-teleporttoBankPower()
-{
-    teleportPlayer(self, (2614.06, 30.8681, 1296.13), (0,-31.1003, 0));
-}
-teleporttoRoof()
-{
-    teleportPlayer(self, (1965.23, 151.344, 2880.13), (0, -120.419, 0));
-}
-teleporttoMainRoom()
-{
-    teleportPlayer(self, (2067.99, 1385.92, 3040.13), (0, 89.623, 0));
-}
-teleporttoHighPac()
-{
-    teleportPlayer(self, (3156.87, -35.4687, 2527.19), (0, 149.403, 0));
-}
+teleporttoHighSpawn() { teleportPlayer(self, (1464.25, 1377.69, 3397.46), (0, -49.442, 0)); }
+teleporttoSlide() { teleportPlayer(self, (2084.26, 2573.54, 3050.59), (0, -4.56284, 0)); }
+teleporttoBrokenElevator() { teleportPlayer(self, (3700.51, 2173.41, 2575.47), (0, -110.597, 0)); }
+teleporttoRedRoom() { teleportPlayer(self, (3176.08, 1426.12, 1298.53), (0, 0.739594, 0)); }
+teleporttoBankPower() { teleportPlayer(self, (2614.06, 30.8681, 1296.13), (0, -31.1003, 0)); }
+teleporttoRoof() { teleportPlayer(self, (1965.23, 151.344, 2880.13), (0, -120.419, 0)); }
+teleporttoMainRoom() { teleportPlayer(self, (2067.99, 1385.92, 3040.13), (0, 89.623, 0)); }
+teleporttoHighPac() { teleportPlayer(self, (3156.87, -35.4687, 2527.19), (0, 149.403, 0)); }
 
 // NukeTown Coords
-teleporttoNukeBus()
-{
-    teleportPlayer(self, (-125, 350, -49));
-}
-teleporttoGreenHouse()
-{
-    teleportPlayer(self, (-623, 417, -56));
-}
-teleporttoGreenOffice()
-{
-    teleportPlayer(self, (-623, 417, 80));
-}
-teleporttoGreenGarden()
-{
-    teleportPlayer(self, (-1557, 387, -64));
-}
-teleporttoGreenGarage()
-{
-    teleportPlayer(self, (-910, 178, -56));
-}
-teleporttoYellowHouse()
-{
-    teleportPlayer(self, (729, 208, -56));
-}
-teleporttoYellowOffice()
-{
-    teleportPlayer(self, (729, 208, 80));
-}
-teleporttoYellowGarden()
-{
-    teleportPlayer(self, (1585, 389, -63));
-}
-teleporttoYellowGarage()
-{
-    teleportPlayer(self, (783, 615, -56.8));
-}
+teleporttoNukeBus() { teleportPlayer(self, (-125, 350, -49)); }
+teleporttoGreenHouse() { teleportPlayer(self, (-623, 417, -56)); }
+teleporttoGreenOffice() { teleportPlayer(self, (-623, 417, 80)); }
+teleporttoGreenGarden() { teleportPlayer(self, (-1557, 387, -64)); }
+teleporttoGreenGarage() { teleportPlayer(self, (-910, 178, -56)); }
+teleporttoYellowHouse() { teleportPlayer(self, (729, 208, -56)); }
+teleporttoYellowOffice() { teleportPlayer(self, (729, 208, 80)); }
+teleporttoYellowGarden() { teleportPlayer(self, (1585, 389, -63)); }
+teleporttoYellowGarage() { teleportPlayer(self, (783, 615, -56.8)); }
 
 //Teleport Player Function
-teleportPlayer(player, origin, angles)
-{
-    player setOrigin(origin);
-    player setPlayerAngles(angles);
-}
+teleportPlayer(player, origin, angles) { player setOrigin(origin); player setPlayerAngles(angles); }
+
 //5.0.1 Additions
 togglevisions()
 {
@@ -5745,27 +5504,18 @@ explodephd()
 	self playsound( "zmb_phdflop_explo" );
 	playfx( explosionfx, self.origin );
 	self damagezombiesinrange( 310, self, "kill" );
-
 }
 
 damagezombiesinrange( range, what, amount )
 {
-	enemy = getaiarray( level.zombie_team );
-	foreach( zombie in enemy )
+	foreach( zombie in getaiarray( level.zombie_team ) )
 	{
 		if( distance( zombie.origin, what.origin ) < range )
 		{
-			if( amount == "kill" )
-			{
-				zombie dodamage( zombie.health * 2, zombie.origin, self );
-			}
-			else
-			{
-				zombie dodamage( amount, zombie.origin, self );
-			}
+			if( amount == "kill" ) zombie dodamage( zombie.health * 2, zombie.origin, self );
+			else zombie dodamage( amount, zombie.origin, self );
 		}
 	}
-
 }
 
 // Harmless stubs to prevent linker errors on non-Origins maps
