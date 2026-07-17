@@ -1,14 +1,17 @@
-# Gr3Zz v5.0.2
+# Gr3Zz v5.0.3
 
 This is a black ops II gsc script menu for Plutonium. This is an edited version of of Gr3Zz v4.1 that can be found [here.](https://www.se7ensins.com/forums/threads/release-gsc-black-ops-2-gr3zz-v4-1-zombie-patch-xbox-ps3-pc.1205963/
-)
+
+## READ THIS
+This no longer requires you to compile the gsc. Just place it in `%localappdata%/Plutonium/storage/t6/scripts/zm` and run play!)<br />
+If you want to use this on a server, just follow the little guide below to add your username to the whitelist, and put the gsc file on the server!
 
 ## Host Whitelist - For Custom Games/Dedicated Servers
 This allows you to setup a whitelist of usernames that will be considered as Host/Co-Host
 The first person that joins will be considered as Host, and the reset will be considered as Co-Host
 
 Find the function `onplayerspawned()` & look for `whitelist = array("USERNAME","USERNAME");`<br />
-Enter comma separated, double quoted usernames, then save and compile the gsc for Plutonium's use. Enjoy!
+Enter comma separated, double quoted usernames
 
 ## How to use
 
