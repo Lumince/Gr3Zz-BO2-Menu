@@ -119,7 +119,7 @@ MuleForAll()
 
 getMenuName()
 {
-	return "Gr3Zz v5.0.3";
+	return "Gr3Zz v5.0.4";
 }
 
 MenuStructure()
