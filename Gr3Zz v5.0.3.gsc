@@ -141,7 +141,7 @@ MenuStructure()
 		self MenuOption(getMenuName(),8,"Teleport Menu",::SubMenu,"Teleport Menu");
 		self MenuOption(getMenuName(),9,"Power Ups",::SubMenu,"Power Ups");
 	}
-	if (self.CoHostself.CoHost==true)
+	if (self.CoHost==true)
 	{
 		self MenuOption(getMenuName(),10,"Game Settings",::SubMenu,"Game Settings");
 		self MenuOption(getMenuName(),11,"Clients Menu",::SubMenu,"Clients Menu");
