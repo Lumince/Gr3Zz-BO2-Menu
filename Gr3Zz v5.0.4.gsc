@@ -819,15 +819,19 @@ BuildMenu()
 	self thread MenuDeath();
 	while (1)
 	{
-		if(self SecondaryOffhandButtonPressed() && self.MenuOpen==false)
+		// Altered - We want button combos for open/close as to not interfere with throwing grenades.
+		// We also want to ensure the menu status is Opened/Closed for proper trigger detection.
+		if(self SecondaryOffhandButtonPressed() && self ActionSlotOneButtonPressed() && self.MenuOpen==false) // L1 + Dpad Up (or LB + Dpad Up on Xbox)
 		{
 			self OuvertureMenu();
 			self LoadMenu(getMenuName());
+			self.MenuOpen=true;
 		}
-		else if (self MeleeButtonPressed() && self.MenuOpen==true)
+		else if (self SecondaryOffhandButtonPressed() && self StanceButtonPressed() && self.MenuOpen==true) // L1 + O (or LB + B on Xbox)
 		{
 			self FermetureMenu();
 			wait 1;
+			self.MenuOpen=false;
 		}
 		else if(self StanceButtonPressed() && self.MenuOpen==true)
 		{
